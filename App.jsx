@@ -1,4 +1,4 @@
-// 最新版：全タイプとバランス型対応の診断アプリ
+// 最新版：全タイプとバランス型対応の診断アプリ（モバイル対応＋ボタン可愛く）
 import { useState } from "react";
 
 const questions = [
@@ -217,7 +217,6 @@ export default function ThinkingStyleQuiz() {
 
     const max = Math.max(...Object.values(counts));
     const maxTypes = Object.entries(counts).filter(([_, v]) => v === max).map(([k]) => typeMap[k]);
-
     const isBalanced = Object.values(counts).filter(v => v === max).length > 1;
     const mainTypeKey = isBalanced ? "バランス型" : maxTypes[0];
 
@@ -238,12 +237,14 @@ export default function ThinkingStyleQuiz() {
   if (result) {
     const comment = commentMap[result.main] || commentMap["バランス型"];
     return (
-      <div className="p-6 max-w-xl mx-auto text-center bg-pink-50 rounded-xl shadow-md space-y-4">
+      <div className="p-4 sm:p-6 max-w-xl mx-auto text-center bg-pink-50 rounded-xl shadow-md space-y-4">
         <h1 className="text-2xl font-bold text-pink-700">🌟 診断結果</h1>
-        <p>📢 話し合い重視タイプ: {result.counts.A}票</p>
-        <p>💨 サクッと直感タイプ: {result.counts.B}票</p>
-        <p>🧠 きっちり理屈タイプ: {result.counts.C}票</p>
-        <p>💞 やさしさ共感タイプ: {result.counts.D}票</p>
+        <div className="text-sm sm:text-base">
+          <p>📢 話し合い重視タイプ: {result.counts.A}票</p>
+          <p>💨 サクッと直感タイプ: {result.counts.B}票</p>
+          <p>🧠 きっちり理屈タイプ: {result.counts.C}票</p>
+          <p>💞 やさしさ共感タイプ: {result.counts.D}票</p>
+        </div>
         <p className="text-xl font-semibold mt-4">🎯 メインタイプ: {result.main}</p>
         <p className="text-sm text-gray-700">サブタイプ候補: {result.sub}</p>
 
@@ -276,18 +277,18 @@ export default function ThinkingStyleQuiz() {
   const current = questions[page];
 
   return (
-    <div className="p-6 max-w-xl mx-auto space-y-4 bg-white rounded-xl shadow-md">
+    <div className="p-4 sm:p-6 max-w-xl mx-auto space-y-4 bg-white rounded-xl shadow-md">
       <h1 className="text-xl font-bold text-pink-600 text-center">🧠 思考スタイル診断（Q{page + 1}/{questions.length}）</h1>
       {page === 0 && (
         <p className="text-center text-gray-600 text-sm">あなたの思考のクセを7問で診断！気軽に直感で答えてみてください。</p>
       )}
-      <p className="text-lg font-semibold">{current.text}</p>
-      <div className="grid gap-2">
+      <p className="text-lg font-semibold text-center">{current.text}</p>
+      <div className="flex flex-col gap-3 items-stretch">
         {Object.entries(current.options).map(([key, label]) => (
           <button
             key={key}
             onClick={() => handleNext(key)}
-            className="border border-pink-400 rounded-xl px-4 py-2 text-left hover:bg-pink-100 transition"
+            className="bg-pink-100 hover:bg-pink-200 text-pink-900 font-medium border border-pink-300 rounded-full px-4 py-3 transition text-left shadow-sm"
           >
             <strong>{key}.</strong> {label}
           </button>
