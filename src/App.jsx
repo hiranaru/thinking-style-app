@@ -281,6 +281,27 @@ export default function ThinkingStyleQuiz() {
             </div>
           </div>
         )}
+        {/* 追加：シェア＆再診断ボタン */}
+<div className="mt-6 flex flex-col sm:flex-row justify-center gap-4">
+  <a
+    href={`https://twitter.com/intent/tweet?text=私の思考スタイルは「${result.main}」タイプでした！%0A#思考スタイル診断%0Ahttps://thinking-style-app.vercel.app/`}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition"
+  >    
+    🐦 診断結果をシェアする
+  </a>
+  <button
+    onClick={() => {
+      setAnswers([]);
+      setPage(0);
+      setResult(null);
+    }}
+    className="bg-pink-400 text-white px-4 py-2 rounded-full hover:bg-pink-500 transition"
+  >
+    🔄 もう一度診断する
+  </button>
+</div>
       </div>
     );
   }
