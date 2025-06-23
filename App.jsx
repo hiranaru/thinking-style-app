@@ -2,7 +2,6 @@
 import { useState } from "react";
 
 const questions = [
-const questions = [
   {
     text: "友達とちょっとした行き違いがあったとき、まずどう思う？",
     options: {
@@ -66,8 +65,6 @@ const questions = [
       D: "相手が自分の気持ちに共感してくれたとき"
     }
   }
-];
-
 ];
 
 const typeMap = {
