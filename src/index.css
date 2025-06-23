@@ -1,3 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Yomogi&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-image: repeating-linear-gradient(
+    45deg,
+    #fff0f5,
+    #fff0f5 10px,
+    #ffe4ec 10px,
+    #ffe4ec 20px
+  );
+  font-family: 'Yomogi', cursive;
+}
+
+h1 {
+  font-family: 'Yomogi', cursive;
+}
+
+/* ボタンなどに可愛さを加える */
+button {
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+/* ボックスの影を柔らかく */
+.shadow-xl {
+  box-shadow: 0 8px 20px rgba(255, 182, 193, 0.3);
+}
