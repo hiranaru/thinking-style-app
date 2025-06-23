@@ -74,12 +74,25 @@ const typeMap = {
 };
 
 export default function ThinkingStyleQuiz() {
-  const [answers, setAnswers] = useState(Array(7).fill(""));
+  const [answers, setAnswers] = useState([]);
+  const [page, setPage] = useState(0);
   const [result, setResult] = useState(null);
 
-  const analyze = () => {
+  const handleNext = (choice) => {
+    const updated = [...answers];
+    updated[page] = choice;
+    setAnswers(updated);
+
+    if (page < questions.length - 1) {
+      setPage(page + 1);
+    } else {
+      analyze(updated);
+    }
+  };
+
+  const analyze = (finalAnswers) => {
     const counts = { A: 0, B: 0, C: 0, D: 0 };
-    answers.forEach(ch => {
+    finalAnswers.forEach(ch => {
       if (counts.hasOwnProperty(ch)) counts[ch]++;
     });
 
@@ -102,51 +115,37 @@ export default function ThinkingStyleQuiz() {
     });
   };
 
+  if (result) {
+    return (
+      <div className="p-6 max-w-xl mx-auto text-center bg-pink-50 rounded-xl shadow-md space-y-4">
+        <h1 className="text-2xl font-bold text-pink-700">\uD83C\uDF1F 診断結果</h1>
+        <p>📢 話し合い重視タイプ: {result.counts.A}票</p>
+        <p>💨 サクッと直感タイプ: {result.counts.B}票</p>
+        <p>🧠 きっちり理屈タイプ: {result.counts.C}票</p>
+        <p>💞 やさしさ共感タイプ: {result.counts.D}票</p>
+        <p className="text-xl font-semibold mt-4">🎯 メインタイプ: {result.main}</p>
+        <p className="text-sm text-gray-700">サブタイプ候補: {result.sub}</p>
+      </div>
+    );
+  }
+
+  const current = questions[page];
+
   return (
-    <div className="p-6 max-w-3xl mx-auto space-y-6">
-      <h1 className="text-2xl font-bold">\uD83E\uDDE0 改訂版：あなたの思考スタイル診断【全7問】</h1>
-      {questions.map((q, idx) => (
-        <div key={idx} className="space-y-2">
-          <p className="font-semibold">【Q{idx + 1}】{q.text}</p>
-          <div className="space-y-1">
-            {Object.entries(q.options).map(([key, label]) => (
-              <label key={key} className="block">
-                <input
-                  type="radio"
-                  name={`q${idx}`}
-                  value={key}
-                  checked={answers[idx] === key}
-                  onChange={() => {
-                    const copy = [...answers];
-                    copy[idx] = key;
-                    setAnswers(copy);
-                  }}
-                  className="mr-2"
-                />
-                {key}. {label}
-              </label>
-            ))}
-          </div>
-        </div>
-      ))}
-
-      <button
-        onClick={analyze}
-        className="bg-blue-600 text-white px-4 py-2 rounded-md"
-      >
-        診断する
-      </button>
-
-      {result && (
-        <div className="mt-6 space-y-2">
-          <p><strong>📢 話し合い重視タイプ:</strong> {result.counts.A}票</p>
-          <p><strong>💨 サクッと直感タイプ:</strong> {result.counts.B}票</p>
-          <p><strong>🧠 きっちり理屈タイプ:</strong> {result.counts.C}票</p>
-          <p><strong>💞 やさしさ共感タイプ:</strong> {result.counts.D}票</p>
-          <p><strong>メインタイプ:</strong> {result.main}</p>
-          <p><strong>サブタイプ候補:</strong> {result.sub}</p>
-        </div>
-      )}
+    <div className="p-6 max-w-xl mx-auto space-y-4 bg-white rounded-xl shadow-md">
+      <h1 className="text-xl font-bold text-pink-600 text-center">\uD83E\uDDE0 思考スタイル診断（Q{page + 1}/{questions.length}）</h1>
+      <p className="text-lg font-semibold">{current.text}</p>
+      <div className="grid gap-2">
+        {Object.entries(current.options).map(([key, label]) => (
+          <button
+            key={key}
+            onClick={() => handleNext(key)}
+            className="border border-pink-400 rounded-xl px-4 py-2 text-left hover:bg-pink-100 transition"
+          >
+            <strong>{key}.</strong> {label}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
