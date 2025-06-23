@@ -1,5 +1,6 @@
-// 最新版：全タイプとバランス型対応の診断アプリ（モバイル対応＋ボタン可愛く）
+// 最新版：全タイプとバランス型対応の診断アプリ（かわいいUI）
 import { useState } from "react";
+import "tailwindcss/tailwind.css";
 
 const questions = [
   {
@@ -237,37 +238,47 @@ export default function ThinkingStyleQuiz() {
   if (result) {
     const comment = commentMap[result.main] || commentMap["バランス型"];
     return (
-      <div className="p-4 sm:p-6 max-w-xl mx-auto text-center bg-pink-50 rounded-xl shadow-md space-y-4">
-        <h1 className="text-2xl font-bold text-pink-700">🌟 診断結果</h1>
-        <div className="text-sm sm:text-base">
+      <div className="p-6 max-w-md mx-auto bg-gradient-to-br from-pink-50 to-pink-100 rounded-3xl shadow-xl border-4 border-pink-200 text-center">
+        <h1 className="text-3xl font-extrabold text-pink-600 mb-4">🌟 診断結果</h1>
+        <div className="text-base space-y-1">
           <p>📢 話し合い重視タイプ: {result.counts.A}票</p>
           <p>💨 サクッと直感タイプ: {result.counts.B}票</p>
           <p>🧠 きっちり理屈タイプ: {result.counts.C}票</p>
           <p>💞 やさしさ共感タイプ: {result.counts.D}票</p>
         </div>
-        <p className="text-xl font-semibold mt-4">🎯 メインタイプ: {result.main}</p>
+        <p className="text-xl font-bold mt-4">🎯 メインタイプ: {result.main}</p>
         <p className="text-sm text-gray-700">サブタイプ候補: {result.sub}</p>
 
         {comment && (
-          <div className="text-left mt-6 bg-white p-4 rounded-lg shadow">
+          <div className="mt-6 p-4 bg-white rounded-xl shadow-md text-left space-y-3">
             <h2 className="text-lg font-bold">💡 タイプ名：{comment.nickname}</h2>
-            <h3 className="mt-2 font-semibold">🔍 特徴まとめ：</h3>
-            <ul className="list-disc list-inside">
-              {comment.traits.map((t, i) => <li key={i}>{t}</li>)}
-            </ul>
-            <h3 className="mt-2 font-semibold">✅ 強み：</h3>
-            <ul className="list-disc list-inside">
-              {comment.strengths.map((s, i) => <li key={i}>{s}</li>)}
-            </ul>
-            <h3 className="mt-2 font-semibold">⚠️ 弱み：</h3>
-            <ul className="list-disc list-inside">
-              {comment.weaknesses.map((w, i) => <li key={i}>{w}</li>)}
-            </ul>
-            <h3 className="mt-2 font-semibold">🛎 アドバイス：</h3>
-            <p>{comment.advice}</p>
-            <h3 className="mt-2 font-semibold">🤝 相性：</h3>
-            <p>◎ 相性が良い：{comment.match.good}</p>
-            <p>△ 相性に注意：{comment.match.bad}</p>
+            <div>
+              <h3 className="font-semibold">🔍 特徴まとめ：</h3>
+              <ul className="list-disc list-inside">
+                {comment.traits.map((t, i) => <li key={i}>{t}</li>)}
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold">✅ 強み：</h3>
+              <ul className="list-disc list-inside">
+                {comment.strengths.map((s, i) => <li key={i}>{s}</li>)}
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold">⚠️ 弱み：</h3>
+              <ul className="list-disc list-inside">
+                {comment.weaknesses.map((w, i) => <li key={i}>{w}</li>)}
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold">🛎 アドバイス：</h3>
+              <p>{comment.advice}</p>
+            </div>
+            <div>
+              <h3 className="font-semibold">🤝 相性：</h3>
+              <p>◎ 相性が良い：{comment.match.good}</p>
+              <p>△ 相性に注意：{comment.match.bad}</p>
+            </div>
           </div>
         )}
       </div>
@@ -277,18 +288,18 @@ export default function ThinkingStyleQuiz() {
   const current = questions[page];
 
   return (
-    <div className="p-4 sm:p-6 max-w-xl mx-auto space-y-4 bg-white rounded-xl shadow-md">
-      <h1 className="text-xl font-bold text-pink-600 text-center">🧠 思考スタイル診断（Q{page + 1}/{questions.length}）</h1>
+    <div className="p-6 max-w-md mx-auto bg-pink-50 rounded-3xl shadow-xl border-4 border-pink-200 space-y-6">
+      <h1 className="text-2xl font-extrabold text-pink-600 text-center">🧠 思考スタイル診断（Q{page + 1}/{questions.length}）</h1>
       {page === 0 && (
-        <p className="text-center text-gray-600 text-sm">あなたの思考のクセを7問で診断！気軽に直感で答えてみてください。</p>
+        <p className="text-center text-gray-600 text-sm">あなたの思考のクセを7問で診断！かわいく直感で答えてみてね♪</p>
       )}
       <p className="text-lg font-semibold text-center">{current.text}</p>
-      <div className="flex flex-col gap-3 items-stretch">
+      <div className="flex flex-col gap-4">
         {Object.entries(current.options).map(([key, label]) => (
           <button
             key={key}
             onClick={() => handleNext(key)}
-            className="bg-pink-100 hover:bg-pink-200 text-pink-900 font-medium border border-pink-300 rounded-full px-4 py-3 transition text-left shadow-sm"
+            className="bg-white border-2 border-pink-300 text-pink-700 rounded-full px-4 py-3 font-semibold shadow hover:bg-pink-100 transition"
           >
             <strong>{key}.</strong> {label}
           </button>
@@ -297,3 +308,4 @@ export default function ThinkingStyleQuiz() {
     </div>
   );
 }
+
