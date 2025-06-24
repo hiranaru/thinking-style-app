@@ -32,3 +32,28 @@ button:hover {
 .shadow-xl {
   box-shadow: 0 8px 20px rgba(255, 182, 193, 0.3);
 }
+.answer-button {
+  @apply rounded-xl px-4 py-2 bg-pink-100 hover:bg-pink-200 text-gray-800 font-bold shadow-xl;
+  transition: all 0.3s ease;
+  transform: scale(1);
+}
+.answer-button:hover {
+  transform: scale(1.05);
+}
+h1, h2, .question-title, .answer-button {
+  font-family: 'Yomogi', cursive;
+}
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
