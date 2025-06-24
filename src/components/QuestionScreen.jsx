@@ -1,7 +1,7 @@
 import React from "react";
 import "../index.css";
 
-export default function QuestionScreen({ page, questions, onSelect }) {
+export default function QuestionScreen({ page, questions, onAnswer }) {
   const current = questions[page];
 
   return (
