@@ -1,10 +1,12 @@
+export default function QuestionScreen({ page, questions, onAnswer }) {
+  const current = questions[page];
+  ...
+
+
+
 // QuestionScreen.jsx
 import React from "react";
 import "../index.css";
-
-
-export default function QuestionScreen({ page, onAnswer }) {
-  const current = questions[page];
 
   return (
     <div className="max-w-[460px] w-[90%] h-[900px] mx-auto bg-pink-50 rounded-3xl shadow-xl border-4 border-pink-200 p-6 flex flex-col justify-between fade-in">
