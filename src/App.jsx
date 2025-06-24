@@ -1,4 +1,5 @@
-import ThinkingStyleQuiz from "./components/ThinkingStyleQuiz";
+import ThinkingStyleQuiz from "./components/ThinkingStyleQuiz.jsx";
+
 
 export default function App() {
   return (
