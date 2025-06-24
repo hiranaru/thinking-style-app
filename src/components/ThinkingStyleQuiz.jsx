@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { db, ref, get, runTransaction } from "../../firebase";
 import thinkingStyles from "../data/thinkingStyles.json";
 import "../index.css";
@@ -71,18 +71,20 @@ const questions = [
 
 export default function ThinkingStyleQuiz() {
   const [answers, setAnswers] = useState([]);
-  const [page, setPage] = useState(-1);
+  const [page, setPage] = useState(-1); // -1 = start screen
   const [result, setResult] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [count, setCount] = useState(0);
 
   useEffect(() => {
     const countRef = ref(db, "diagnosisCount");
-    get(countRef).then((snapshot) => {
-      if (snapshot.exists()) {
-        setCount(snapshot.val());
-      }
-    });
+    get(countRef)
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          setCount(snapshot.val());
+        }
+      })
+      .catch((err) => console.error("Firebase count read error:", err));
   }, []);
 
   const handleNext = (choice) => {
@@ -106,9 +108,9 @@ export default function ThinkingStyleQuiz() {
     const matchedResult = thinkingStyles.find((item) => item.id === answerId);
     setResult(matchedResult || { error: true });
 
-    // 🔼 Firebaseのカウントを+1する
-    runTransaction(ref(db, "diagnosisCount"), (current) => {
-      return (current || 0) + 1;
+    const countRef = ref(db, "diagnosisCount");
+    runTransaction(countRef, (n) => (n || 0) + 1).catch((err) => {
+      console.error("Firebase count update error:", err);
     });
   };
 
@@ -135,17 +137,13 @@ export default function ThinkingStyleQuiz() {
     return (
       <div className="max-w-[460px] w-[90%] h-[900px] mx-auto bg-pink-50 rounded-3xl shadow-xl border-4 border-pink-200 p-6 flex flex-col justify-center space-y-6 fade-in text-left">
         <h1 className="text-2xl font-extrabold text-pink-600 text-center">🌟 あなたの診断結果</h1>
-        <div className="result-section">
-          <h2 className="result-title">🧠 タイプ：{result.mainType}</h2>
+        <div>
+          <h2 className="text-lg font-bold text-pink-700">🧠 タイプ：{result.mainType}</h2>
           <p className="text-sm text-gray-600 mb-2">（{result.subType}）</p>
-          <div>
-            <h3 className="font-semibold">💡 一言まとめ</h3>
-            <p>{result.title}</p>
-          </div>
-          <div>
-            <h3 className="font-semibold">📌 特徴</h3>
-            <p>{result.description}</p>
-          </div>
+          <h3 className="font-semibold">💡 一言まとめ</h3>
+          <p>{result.title}</p>
+          <h3 className="font-semibold mt-2">📌 特徴</h3>
+          <p>{result.description}</p>
         </div>
         <div className="text-center mt-6 flex flex-col gap-4">
           <a
@@ -174,14 +172,13 @@ export default function ThinkingStyleQuiz() {
   if (page === -1) {
     return (
       <div className="max-w-[460px] w-[90%] h-[900px] mx-auto flex flex-col justify-center items-center bg-pink-50 rounded-3xl shadow-xl border-4 border-pink-200 p-6 text-center fade-in space-y-6">
-        <h1 className="text-2xl font-extrabold text-pink-600 leading-snug">
-          🧠 察してほしい派？言葉にしてほしい派？<br />
-          あなたの思考クセを探る診断！
-        </h1>
-        <p className="text-sm text-gray-600 mt-2">
-          🔄 <strong>{count}</strong>人が診断しています！
-        </p>
-        <p className="text-base text-gray-700">あなたの思考のクセを7問で診断します！</p>
+        <h1 className="text-2xl font-extrabold text-pink-600">🧠 察してほしい派？言葉にしてほしい派？</h1>
+        {typeof count === "number" && (
+          <p className="text-sm text-gray-600 mt-2">
+            🔄 <strong>{count}</strong>人が診断しています！
+          </p>
+        )}
+        <p className="text-gray-700 text-base">あなたの思考のクセを7問で診断します！</p>
         <button
           onClick={() => setPage(0)}
           className="bg-pink-500 text-white px-6 py-3 rounded-full hover:bg-pink-600 transition"
@@ -198,7 +195,7 @@ export default function ThinkingStyleQuiz() {
     <div className="max-w-[460px] w-[90%] h-[900px] mx-auto bg-pink-50 rounded-3xl shadow-xl border-4 border-pink-200 p-6 flex flex-col justify-between fade-in">
       <div>
         <h1 className="text-2xl font-extrabold text-pink-600 text-center mb-4">
-          🧠 思考スタイル診断（Q{page + 1}/{questions.length}）
+          🧠 察してほしい派？言葉にしてほしい派？（Q{page + 1}/{questions.length}）
         </h1>
         <div className="min-h-[80px] flex items-center justify-center mb-4">
           <p className="text-base md:text-lg font-semibold text-center fade-in">{current.text}</p>
@@ -208,11 +205,11 @@ export default function ThinkingStyleQuiz() {
         </div>
       </div>
       <div className="flex flex-col gap-4">
-        {Object.entries(current.options).map(([key, label], index) => (
+        {Object.entries(current.options).map(([key, label]) => (
           <button
             key={key}
             onClick={() => handleNext(key)}
-            className={`answer-button ${selectedIndex === key ? "selected" : ""}`}
+            className={`answer-button ${selectedIndex === key ? 'selected' : ''}`}
           >
             <strong>{key}.</strong> {label}
           </button>
@@ -229,3 +226,4 @@ export default function ThinkingStyleQuiz() {
     </div>
   );
 }
+
