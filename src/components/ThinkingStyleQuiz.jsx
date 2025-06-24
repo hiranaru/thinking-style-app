@@ -1,15 +1,8 @@
-// ✖️ 以下の2行を削除
-// import { db, ref, get, runTransaction } from "../firebase";
-// const [count, setCount] = useState(0);
-// useEffect(() => { ... }) ← これも削除
-
-// ✅ このように変更
 import { useState } from "react";
 import thinkingStyles from "../data/thinkingStyles.json";
 import StartScreen from "./StartScreen";
 import QuestionScreen from "./QuestionScreen";
 import ResultScreen from "./ResultScreen";
-
 
 const questions = [
   {
@@ -82,18 +75,6 @@ export default function ThinkingStyleQuiz() {
   const [page, setPage] = useState(-1); // -1 = start screen
   const [result, setResult] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(null);
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    const countRef = ref(db, "diagnosisCount");
-    get(countRef)
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          setCount(snapshot.val());
-        }
-      })
-      .catch((err) => console.error("Firebase count read error:", err));
-  }, []);
 
   const handleNext = (choice) => {
     setSelectedIndex(choice);
@@ -115,11 +96,6 @@ export default function ThinkingStyleQuiz() {
     const answerId = finalAnswers.join("");
     const matchedResult = thinkingStyles.find((item) => item.id === answerId);
     setResult(matchedResult || { error: true });
-
-    const countRef = ref(db, "diagnosisCount");
-    runTransaction(countRef, (n) => (n || 0) + 1).catch((err) => {
-      console.error("Firebase count update error:", err);
-    });
   };
 
   if (result) {
