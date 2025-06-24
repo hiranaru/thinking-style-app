@@ -70,6 +70,7 @@ const questions = [
   }
 ];
 
+
 export default function ThinkingStyleQuiz() {
   const [answers, setAnswers] = useState([]);
   const [page, setPage] = useState(-1); // -1 = start screen
