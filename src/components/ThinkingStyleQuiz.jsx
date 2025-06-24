@@ -99,7 +99,7 @@ export default function ThinkingStyleQuiz() {
   if (result) {
     if (result.error) {
       return (
-        <div className="p-6 max-w-md mx-auto bg-white rounded-xl shadow-md text-center fade-in">
+        <div className="w-[460px] h-[900px] mx-auto bg-white rounded-3xl shadow-xl border-4 border-pink-200 p-6 flex flex-col justify-center items-center space-y-6 fade-in text-center">
           <h1 className="text-2xl font-bold text-red-600">診断結果が見つかりませんでした</h1>
           <p className="mt-4">入力に誤りがあった可能性があります。もう一度お試しください。</p>
           <button
@@ -117,7 +117,7 @@ export default function ThinkingStyleQuiz() {
     }
 
     return (
-      <div className="p-6 max-w-md mx-auto bg-pink-50 rounded-3xl shadow-xl border-4 border-pink-200 space-y-6 fade-in min-h-[600px]">
+      <div className="w-[460px] h-[900px] mx-auto bg-pink-50 rounded-3xl shadow-xl border-4 border-pink-200 p-6 flex flex-col justify-center space-y-6 fade-in">
         <h1 className="text-2xl font-extrabold text-pink-600 text-center">🌟 あなたの診断結果</h1>
         <div>
           <h2 className="text-xl font-bold text-pink-700">🧠 タイプ：{result.mainType}</h2>
@@ -158,12 +158,12 @@ export default function ThinkingStyleQuiz() {
   const current = questions[page];
 
   return (
-    <div className="p-6 max-w-md mx-auto bg-pink-50 rounded-3xl shadow-xl border-4 border-pink-200 space-y-6 fade-in">
+    <div className="w-[460px] h-[900px] mx-auto bg-pink-50 rounded-3xl shadow-xl border-4 border-pink-200 p-6 flex flex-col justify-center space-y-6 fade-in">
       <h1 className="text-2xl font-extrabold text-pink-600 text-center">
         🧠 思考スタイル診断（Q{page + 1}/{questions.length}）
       </h1>
 
-      {/* 🔽 ここが進捗バーの追加部分 */}
+      {/* 🔽 進捗バー */}
       <div className="w-full bg-pink-100 h-3 rounded-full overflow-hidden mb-4">
         <div
           className="bg-pink-400 h-full transition-all duration-300"
