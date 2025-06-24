@@ -1,8 +1,15 @@
-import { useState, useEffect } from "react";
+// ✖️ 以下の2行を削除
+// import { db, ref, get, runTransaction } from "../firebase";
+// const [count, setCount] = useState(0);
+// useEffect(() => { ... }) ← これも削除
+
+// ✅ このように変更
+import { useState } from "react";
 import thinkingStyles from "../data/thinkingStyles.json";
 import StartScreen from "./StartScreen";
 import QuestionScreen from "./QuestionScreen";
 import ResultScreen from "./ResultScreen";
+
 
 const questions = [
   {
@@ -129,7 +136,7 @@ export default function ThinkingStyleQuiz() {
   }
 
   if (page === -1) {
-    return <StartScreen onStart={() => setPage(0)} count={count} />;
+    return <StartScreen onStart={() => setPage(0)} />;
   }
 
   return (
