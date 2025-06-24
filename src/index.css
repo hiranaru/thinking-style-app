@@ -13,13 +13,13 @@ body {
     #ffe4ec 10px,
     #ffe4ec 20px
   );
-  font-family: "ヒラギノ丸ゴ Pro W4", "Hiragino Maru Gothic Pro", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Noto Sans JP", "Helvetica Neue", sans-serif;
+  font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Helvetica Neue", sans-serif;
   font-size: 16px;
   line-height: 1.6;
 }
 
-/* タイトルとボタンは手書き風フォント */
-h1, h2, .question-title, .answer-button {
+/* タイトルにはYomogiを使用 */
+h1, h2 {
   font-family: 'Yomogi', cursive;
 }
 
@@ -44,9 +44,11 @@ button:hover {
   box-shadow: 0 8px 20px rgba(255, 182, 193, 0.3);
 }
 
-/* 回答ボタンのデザイン */
+/* 回答ボタンのデザイン（可読性重視） */
 .answer-button {
-  @apply w-full rounded-full px-5 py-3 bg-white border-2 border-pink-300 text-pink-700 font-semibold text-base text-left shadow transition hover:bg-pink-100;
+  @apply w-full rounded-full px-5 py-3 bg-white border-2 border-pink-300 font-medium text-base text-left shadow transition hover:bg-pink-100;
+  font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Helvetica Neue", sans-serif;
+  color: #333;
   transition: all 0.3s ease;
   transform: scale(1);
 }
@@ -87,4 +89,3 @@ button:hover {
 .share-button:hover {
   transform: scale(1.05);
 }
-
