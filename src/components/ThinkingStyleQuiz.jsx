@@ -159,9 +159,22 @@ export default function ThinkingStyleQuiz() {
 
   return (
     <div className="p-6 max-w-md mx-auto bg-pink-50 rounded-3xl shadow-xl border-4 border-pink-200 space-y-6 fade-in">
-      <h1 className="text-2xl font-extrabold text-pink-600 text-center">🧠 思考スタイル診断（Q{page + 1}/{questions.length}）</h1>
+      <h1 className="text-2xl font-extrabold text-pink-600 text-center">
+        🧠 思考スタイル診断（Q{page + 1}/{questions.length}）
+      </h1>
+
+      {/* 🔽 ここが進捗バーの追加部分 */}
+      <div className="w-full bg-pink-100 h-3 rounded-full overflow-hidden mb-4">
+        <div
+          className="bg-pink-400 h-full transition-all duration-300"
+          style={{ width: `${((page + 1) / questions.length) * 100}%` }}
+        ></div>
+      </div>
+
       {page === 0 && (
-        <p className="text-center text-gray-600 text-sm fade-in">あなたの思考のクセを7問で診断！直感で答えてみてね♪</p>
+        <p className="text-center text-gray-600 text-sm fade-in">
+          あなたの思考のクセを7問で診断！直感で答えてみてね♪
+        </p>
       )}
       <p className="text-lg font-semibold text-center fade-in">{current.text}</p>
       <div className="flex flex-col gap-4">
