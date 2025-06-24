@@ -21,7 +21,7 @@ export default function QuestionScreen({ page, questions, onAnswer }) {
         {Object.entries(current.options).map(([key, label]) => (
           <button
             key={key}
-            onClick={() => onAnswer(key)} // ✅ 修正ここ！
+            onClick={() => onAnswer(key)}
             className="answer-button"
           >
             <strong>{key}.</strong> {label}
