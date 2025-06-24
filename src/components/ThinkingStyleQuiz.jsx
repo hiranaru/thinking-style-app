@@ -3,8 +3,6 @@ import { useState } from "react";
 import thinkingStyles from "../data/thinkingStyles.json";
 import "../index.css";
 
-
-
 const questions = [
   {
     text: "友達とちょっとした行き違いがあったとき、まずどう思う？",
