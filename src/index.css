@@ -89,3 +89,18 @@ button:hover {
 .share-button:hover {
   transform: scale(1.05);
 }
+/* シェアボタン用 */
+.share-button {
+  @apply bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition-all duration-200;
+  transform: scale(1);
+}
+.share-button:hover {
+  transform: scale(1.05);
+}
+
+/* 選択されたボタンの演出 */
+.answer-button.selected {
+  background-color: #ffe4ec;
+  opacity: 0.8;
+  transform: scale(0.95);
+}
