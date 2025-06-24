@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { db, ref, get, runTransaction } from "../firebase";
 import thinkingStyles from "../data/thinkingStyles.json";
 import "../index.css";
 
@@ -70,9 +71,19 @@ const questions = [
 
 export default function ThinkingStyleQuiz() {
   const [answers, setAnswers] = useState([]);
-  const [page, setPage] = useState(-1); // -1 = start screen
+  const [page, setPage] = useState(-1);
   const [result, setResult] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(null);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const countRef = ref(db, "diagnosisCount");
+    get(countRef).then((snapshot) => {
+      if (snapshot.exists()) {
+        setCount(snapshot.val());
+      }
+    });
+  }, []);
 
   const handleNext = (choice) => {
     setSelectedIndex(choice);
@@ -83,20 +94,24 @@ export default function ThinkingStyleQuiz() {
 
       if (page < questions.length - 1) {
         setPage(page + 1);
-        setSelectedIndex(null); // reset
+        setSelectedIndex(null);
       } else {
         analyze(updated);
       }
-    }, 150); // animation delay
+    }, 150);
   };
 
   const analyze = (finalAnswers) => {
     const answerId = finalAnswers.join("");
     const matchedResult = thinkingStyles.find((item) => item.id === answerId);
     setResult(matchedResult || { error: true });
+
+    // 🔼 Firebaseのカウントを+1する
+    runTransaction(ref(db, "diagnosisCount"), (current) => {
+      return (current || 0) + 1;
+    });
   };
 
-  // 結果画面
   if (result) {
     if (result.error) {
       return (
@@ -156,12 +171,17 @@ export default function ThinkingStyleQuiz() {
     );
   }
 
-  // スタート画面
   if (page === -1) {
     return (
       <div className="max-w-[460px] w-[90%] h-[900px] mx-auto flex flex-col justify-center items-center bg-pink-50 rounded-3xl shadow-xl border-4 border-pink-200 p-6 text-center fade-in space-y-6">
-        <h1 className="text-2xl font-extrabold text-pink-600">🧠 思考スタイル診断</h1>
-        <p className="text-gray-700 text-base">あなたの思考のクセを7問で診断します！</p>
+        <h1 className="text-2xl font-extrabold text-pink-600 leading-snug">
+          🧠 察してほしい派？言葉にしてほしい派？<br />
+          あなたの思考クセを探る診断！
+        </h1>
+        <p className="text-sm text-gray-600 mt-2">
+          🔄 <strong>{count}</strong>人が診断しています！
+        </p>
+        <p className="text-base text-gray-700">あなたの思考のクセを7問で診断します！</p>
         <button
           onClick={() => setPage(0)}
           className="bg-pink-500 text-white px-6 py-3 rounded-full hover:bg-pink-600 transition"
@@ -192,7 +212,7 @@ export default function ThinkingStyleQuiz() {
           <button
             key={key}
             onClick={() => handleNext(key)}
-            className={`answer-button ${selectedIndex === key ? 'selected' : ''}`}
+            className={`answer-button ${selectedIndex === key ? "selected" : ""}`}
           >
             <strong>{key}.</strong> {label}
           </button>
