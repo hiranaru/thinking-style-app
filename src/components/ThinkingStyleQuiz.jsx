@@ -1,6 +1,6 @@
 import { useState } from "react";
 import thinkingStyles from "../data/thinkingStyles.json";
-import "../index.css"; // fade-in や answer-button を使うために必要
+import "../index.css";
 
 const questions = [
   {
@@ -70,7 +70,7 @@ const questions = [
 
 export default function ThinkingStyleQuiz() {
   const [answers, setAnswers] = useState([]);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(-1); // -1 = スタート前
   const [result, setResult] = useState(null);
 
   const handleNext = (choice) => {
@@ -88,7 +88,6 @@ export default function ThinkingStyleQuiz() {
   const analyze = (finalAnswers) => {
     const answerId = finalAnswers.join("");
     const matchedResult = thinkingStyles.find((item) => item.id === answerId);
-
     if (!matchedResult) {
       setResult({ error: true });
     } else {
@@ -105,12 +104,12 @@ export default function ThinkingStyleQuiz() {
           <button
             onClick={() => {
               setAnswers([]);
-              setPage(0);
+              setPage(-1);
               setResult(null);
             }}
             className="mt-6 bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-600 transition"
           >
-            🔄 やり直す
+            🔄 最初からやり直す
           </button>
         </div>
       );
@@ -143,7 +142,7 @@ export default function ThinkingStyleQuiz() {
           <button
             onClick={() => {
               setAnswers([]);
-              setPage(0);
+              setPage(-1);
               setResult(null);
             }}
             className="bg-pink-400 text-white px-4 py-2 rounded-full hover:bg-pink-500 transition"
@@ -155,38 +154,43 @@ export default function ThinkingStyleQuiz() {
     );
   }
 
+  // スタート前の画面
+  if (page === -1) {
+    return (
+      <div className="w-[460px] h-[900px] mx-auto flex flex-col justify-center items-center bg-pink-50 rounded-3xl shadow-xl border-4 border-pink-200 p-6 text-center fade-in space-y-6">
+        <h1 className="text-2xl font-extrabold text-pink-600">🧠 思考スタイル診断</h1>
+        <p className="text-gray-700">あなたの思考のクセを7問で診断します！</p>
+        <button
+          onClick={() => setPage(0)}
+          className="bg-pink-500 text-white px-6 py-3 rounded-full hover:bg-pink-600 transition"
+        >
+          ▶ スタート
+        </button>
+      </div>
+    );
+  }
+
   const current = questions[page];
 
   return (
     <div className="w-[460px] h-[900px] mx-auto bg-pink-50 rounded-3xl shadow-xl border-4 border-pink-200 p-6 flex flex-col justify-between fade-in">
-      {/* タイトル */}
+      {/* 上部エリア */}
       <div>
         <h1 className="text-2xl font-extrabold text-pink-600 text-center mb-4">
           🧠 思考スタイル診断（Q{page + 1}/{questions.length}）
         </h1>
 
-        {/* 進捗バー */}
-        <div className="w-full bg-pink-100 h-3 rounded-full overflow-hidden mb-6">
-          <div
-            className="bg-pink-400 h-full transition-all duration-300"
-            style={{ width: `${((page + 1) / questions.length) * 100}%` }}
-          ></div>
+        <div className="min-h-[80px] flex items-center justify-center mb-4">
+          <p className="text-lg font-semibold text-center fade-in">{current.text}</p>
         </div>
 
-        {/* 初回説明 */}
-        {page === 0 && (
-          <p className="text-center text-gray-600 text-sm fade-in mb-4">
-            あなたの思考のクセを7問で診断！直感で答えてみてね♪
-          </p>
-        )}
-
-        {/* 質問文（高さ固定） */}
-        <div className="min-h-[80px] flex items-center justify-center mb-6">
-          <p className="text-lg font-semibold text-center fade-in">{current.text}</p>
+        {/* 🌞 画像表示 */}
+        <div className="flex justify-center mb-4">
+          <img src="/26462751.jpg" alt="sun" className="w-20 h-20 object-contain" />
         </div>
       </div>
 
-      {/* ボタン（常に下部） */}
+      {/* ボタンエリア */}
       <div className="flex flex-col gap-4">
         {Object.entries(current.options).map(([key, label]) => (
           <button
@@ -197,6 +201,16 @@ export default function ThinkingStyleQuiz() {
             <strong>{key}.</strong> {label}
           </button>
         ))}
+      </div>
+
+      {/* フッター：進捗バー */}
+      <div className="mt-6">
+        <div className="w-full bg-pink-100 h-3 rounded-full overflow-hidden">
+          <div
+            className="bg-pink-400 h-full transition-all duration-300"
+            style={{ width: `${((page + 1) / questions.length) * 100}%` }}
+          ></div>
+        </div>
       </div>
     </div>
   );
