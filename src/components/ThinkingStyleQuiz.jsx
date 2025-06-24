@@ -1,8 +1,8 @@
 import { useState } from "react";
 import thinkingStyles from "../data/thinkingStyles.json";
-import StartScreen from "./StartScreen";
-import QuestionScreen from "./QuestionScreen";
-import ResultScreen from "./ResultScreen";
+import StartScreen from "./StartScreen.jsx";
+import QuestionScreen from "./QuestionScreen.jsx";
+import ResultScreen from "./ResultScreen.jsx";
 
 const questions = [
   {
