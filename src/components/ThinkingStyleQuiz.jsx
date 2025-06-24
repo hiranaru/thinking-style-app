@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { db, ref, get, runTransaction } from "../firebase";
 import thinkingStyles from "../data/thinkingStyles.json";
 import StartScreen from "./StartScreen";
 import QuestionScreen from "./QuestionScreen";
