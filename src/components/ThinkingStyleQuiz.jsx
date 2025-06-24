@@ -1,5 +1,5 @@
 import { db, ref, get, runTransaction } from "../firebase";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import thinkingStyles from "../data/thinkingStyles.json";
 import "../index.css";
 
