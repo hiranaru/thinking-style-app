@@ -11,8 +11,8 @@ const questions = [
       A: "話せば分かると思うからちゃんと話したい",
       B: "面倒ごとは避けたいし、自然に戻ればいい",
       C: "どこにズレがあったのか考えたくなる",
-      D: "相手を傷つけたかもしれない…と気になる"
-    }
+      D: "相手を傷つけたかもしれない…と気になる",
+    },
   },
   {
     text: "予定の相談をしていたら相手の返信が止まりました。どう感じる？",
@@ -20,8 +20,8 @@ const questions = [
       A: "何かあったのかな？確認の連絡を入れよう",
       B: "自由にしてもらっていいかな、と思う",
       C: "スケジュールの把握ミスかな？と想定する",
-      D: "嫌われたのかな？と不安になる"
-    }
+      D: "嫌われたのかな？と不安になる",
+    },
   },
   {
     text: "自分の気持ちがうまく伝わらなかった時は？",
@@ -29,8 +29,8 @@ const questions = [
       A: "どうすれば伝わるか、改めて話そうとする",
       B: "伝わらないなら仕方ないと割り切る",
       C: "表現の仕方を修正したくなる",
-      D: "伝えたことで相手がどう感じたかが気になる"
-    }
+      D: "伝えたことで相手がどう感じたかが気になる",
+    },
   },
   {
     text: "仕事や作業の分担を決めるとき、どう進める？",
@@ -38,8 +38,8 @@ const questions = [
       A: "一緒に話して、希望をすり合わせて決めたい",
       B: "誰かがスパッと決めてくれる方がラク",
       C: "能力・効率を踏まえて合理的に割り振りたい",
-      D: "みんなが無理なくできそうな形を優先したい"
-    }
+      D: "みんなが無理なくできそうな形を優先したい",
+    },
   },
   {
     text: "「察してよ」と言われたらどう思う？",
@@ -47,8 +47,8 @@ const questions = [
       A: "言わなきゃ分からないって！",
       B: "まあ…ある程度は察するのが礼儀かも",
       C: "言葉にしないから誤解が生まれるんだよ",
-      D: "たしかに察する努力はしたいけど、ちょっとしんどい…"
-    }
+      D: "たしかに察する努力はしたいけど、ちょっとしんどい…",
+    },
   },
   {
     text: "誰かの意見に違和感を感じた時、どうする？",
@@ -56,8 +56,8 @@ const questions = [
       A: "そのまま伝えて話し合う",
       B: "自分の中で処理して流す",
       C: "どこに食い違いがあるのか分析する",
-      D: "あえて波風立てずにスルーする"
-    }
+      D: "あえて波風立てずにスルーする",
+    },
   },
   {
     text: "あなたが「わかってもらえた」と感じる瞬間は？",
@@ -65,11 +65,10 @@ const questions = [
       A: "話してて気持ちがすれ違ってないと感じたとき",
       B: "あえて言わなくても通じたとき",
       C: "自分の意図を正確に理解してもらえたとき",
-      D: "相手が自分の気持ちに共感してくれたとき"
-    }
-  }
+      D: "相手が自分の気持ちに共感してくれたとき",
+    },
+  },
 ];
-
 
 export default function ThinkingStyleQuiz() {
   const [answers, setAnswers] = useState([]);
@@ -77,7 +76,7 @@ export default function ThinkingStyleQuiz() {
   const [result, setResult] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(null);
 
-  const handleNext = (choice) => {
+  const handleAnswer = (choice) => {
     setSelectedIndex(choice);
     setTimeout(() => {
       const updated = [...answers];
@@ -121,7 +120,7 @@ export default function ThinkingStyleQuiz() {
       page={page}
       questions={questions}
       current={questions[page]}
-      onSelect={handleNext}
+      onAnswer={handleAnswer}
       selectedIndex={selectedIndex}
     />
   );
