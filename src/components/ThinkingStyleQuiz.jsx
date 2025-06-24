@@ -1,4 +1,4 @@
-import { db, ref, get, runTransaction } from "../firebase.js";
+import { db, ref, get, runTransaction } from "../firebase";
 import { useState } from "react";
 import thinkingStyles from "../data/thinkingStyles.json";
 import "../index.css";
