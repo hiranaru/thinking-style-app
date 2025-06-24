@@ -117,7 +117,7 @@ export default function ThinkingStyleQuiz() {
     }
 
     return (
-      <div className="fade-in p-6 max-w-md mx-auto bg-gradient-to-br from-pink-50 to-pink-100 rounded-3xl shadow-xl border-4 border-pink-200 text-left space-y-4">
+      <div className="p-6 max-w-md mx-auto bg-pink-50 rounded-3xl shadow-xl border-4 border-pink-200 space-y-6 fade-in min-h-[600px]">
         <h1 className="text-2xl font-extrabold text-pink-600 text-center">🌟 あなたの診断結果</h1>
         <div>
           <h2 className="text-xl font-bold text-pink-700">🧠 タイプ：{result.mainType}</h2>
