@@ -1,7 +1,7 @@
 // QuestionScreen.jsx
 import React from "react";
-import questions from "../data/questions.json";
 import "../index.css";
+
 
 export default function QuestionScreen({ page, onAnswer }) {
   const current = questions[page];
