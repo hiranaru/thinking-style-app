@@ -9,7 +9,7 @@ export default function QuestionScreen({ page, questions, onAnswer }) {
       {/* コンテンツエリア */}
       <div className="flex-1 overflow-y-auto px-4 py-6">
         <h1 className="text-2xl font-extrabold text-[#0077c2] text-center mb-4">
-          🧠 察してほしい？言葉にしてほしい？（Q{page + 1}/{questions.length}）
+          察してほしい？言葉にしてほしい？（Q{page + 1}/{questions.length}）
         </h1>
 
         <p className="text-base md:text-lg font-semibold text-center mb-4">
