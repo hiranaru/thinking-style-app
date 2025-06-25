@@ -17,7 +17,7 @@ export default function QuestionScreen({ page, questions, onAnswer }) {
         </p>
 
         <div className="flex justify-center mb-4">
-          <img src="/26462751.jpg" alt="sun" className="w-24 h-24 object-contain" />
+          <img src="/Q01.jpg" alt="sun" className="w-24 h-24 object-contain" />
         </div>
 
         <div className="flex flex-col gap-4">
