@@ -5,10 +5,10 @@ export default function QuestionScreen({ page, questions, onAnswer }) {
   const current = questions[page];
 
   return (
-    <div className="bg-pink-50 min-h-screen flex flex-col">
+    <div className="bg-[#f0f4f8] min-h-screen flex flex-col">
       {/* コンテンツエリア */}
       <div className="flex-1 overflow-y-auto px-4 py-6">
-        <h1 className="text-2xl font-extrabold text-pink-600 text-center mb-4">
+        <h1 className="text-2xl font-extrabold text-[#0077c2] text-center mb-4">
           🧠 察してほしい？言葉にしてほしい？（Q{page + 1}/{questions.length}）
         </h1>
 
@@ -34,10 +34,10 @@ export default function QuestionScreen({ page, questions, onAnswer }) {
       </div>
 
       {/* 固定表示の進捗バー */}
-      <div className="sticky bottom-0 bg-pink-50 px-4 pt-2 pb-4 shadow-inner">
-        <div className="w-full bg-pink-100 h-3 rounded-full overflow-hidden">
+      <div className="sticky bottom-0 bg-[#f0f4f8] px-4 pt-2 pb-4 shadow-inner">
+        <div className="w-full bg-yellow-100 h-3 rounded-full overflow-hidden">
           <div
-            className="bg-pink-400 h-full transition-all duration-300"
+            className="bg-yellow-400 h-full transition-all duration-300"
             style={{ width: `${((page + 1) / questions.length) * 100}%` }}
           ></div>
         </div>
