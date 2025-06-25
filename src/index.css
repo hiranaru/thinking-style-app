@@ -4,12 +4,29 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 背景ストライプ → SBH風グレー基調に変更 */
+/* 背景ストライプ（じわ〜っと動く演出） */
 body {
-  background-color: #f0f4f8; /* グレーよりの水色 */
+  background: repeating-linear-gradient(
+    45deg,
+    #f0f4f8,
+    #f0f4f8 10px,
+    #e0ecf4 10px,
+    #e0ecf4 20px
+  );
+  background-size: 200% 200%;
+  animation: stripeMove 20s linear infinite;
   font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Helvetica Neue", sans-serif;
   font-size: 16px;
   line-height: 1.6;
+}
+
+@keyframes stripeMove {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
 }
 
 /* タイトルにはYomogiを使用 */
