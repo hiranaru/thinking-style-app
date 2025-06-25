@@ -4,15 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 背景ストライプ */
+/* 背景ストライプ → SBH風グレー基調に変更 */
 body {
-  background-image: repeating-linear-gradient(
-    45deg,
-    #fff0f5,
-    #fff0f5 10px,
-    #ffe4ec 10px,
-    #ffe4ec 20px
-  );
+  background-color: #f0f4f8; /* グレーよりの水色 */
   font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Helvetica Neue", sans-serif;
   font-size: 16px;
   line-height: 1.6;
@@ -23,12 +17,12 @@ h1, h2 {
   font-family: 'Yomogi', cursive;
 }
 
-/* h1専用：大きめ＆かわいさ演出 */
+/* h1専用：大きめ＆企業カラーに */
 h1 {
   font-size: 1.75rem;
   font-weight: bold;
   text-align: center;
-  color: #d63384;
+  color: #0077c2; /* 青系 */
 }
 
 /* ホバー時の拡大アニメーション */
@@ -39,28 +33,32 @@ button:hover {
   transform: scale(1.05);
 }
 
-/* 柔らかい影 */
+/* 柔らかい影（青系にトーン変更） */
 .shadow-xl {
-  box-shadow: 0 8px 20px rgba(255, 182, 193, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 119, 194, 0.1);
 }
 
-/* 回答ボタンのデザイン（可読性重視） */
+/* 回答ボタンのデザイン（SBHカラー：黄×青） */
 .answer-button {
-  @apply w-full rounded-full px-5 py-3 bg-white border-2 border-pink-300 font-medium text-base text-left shadow transition hover:bg-pink-100;
+  @apply w-full rounded-full px-5 py-3 bg-white border-2 border-yellow-400 font-medium text-base text-left shadow transition hover:bg-yellow-100;
   font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Helvetica Neue", sans-serif;
-  color: #333;
+  color: #00528c; /* 濃い青 */
   transition: all 0.3s ease;
   transform: scale(1);
 }
 .answer-button:hover {
   transform: scale(1.05);
 }
+.answer-button.selected {
+  background-color: #fff8dc; /* 薄い黄色 */
+  opacity: 0.9;
+  transform: scale(0.95);
+}
 
 /* フェードインアニメーション */
 .fade-in {
   animation: fadeIn 0.5s ease-in-out;
 }
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -71,25 +69,18 @@ button:hover {
     transform: translateY(0);
   }
 }
+
 .result-section {
   @apply space-y-4 text-base text-gray-700;
 }
-
 .result-title {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #d63384;
+  color: #0077c2; /* 青 */
   font-family: 'Yomogi', cursive;
 }
 
-.share-button {
-  @apply bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition-all duration-200;
-  transform: scale(1);
-}
-.share-button:hover {
-  transform: scale(1.05);
-}
-/* シェアボタン用 */
+/* シェアボタン（青基調） */
 .share-button {
   @apply bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition-all duration-200;
   transform: scale(1);
@@ -98,16 +89,11 @@ button:hover {
   transform: scale(1.05);
 }
 
-/* 選択されたボタンの演出 */
-.answer-button.selected {
-  background-color: #ffe4ec;
-  opacity: 0.8;
-  transform: scale(0.95);
-}
+/* 高さとオーバーフロー管理（スマホでの表示改善） */
 html,
 body,
 #root {
   height: 100%;
   max-height: 100dvh;
-  overflow: hidden;
+  overflow: auto;
 }
