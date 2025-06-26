@@ -74,7 +74,7 @@ export default function ResultScreen({ result, onRetry }) {
         onClick={onRetry}
         className="share-button block mx-auto mt-4"
       >
-        🔄 最初からやり直す
+        最初からやり直す
       </button>
     </div>
   );
