@@ -5,7 +5,12 @@ export default function ResultScreen({ result, answers, onRetry }) {
   if (result.error) {
     return (
       <div className="max-w-[460px] w-[90%] h-[700px] mx-auto bg-blue-50 rounded-3xl shadow-xl border-4 border-yellow-300 p-6 text-center space-y-6">
-        <h2 className="text-xl font-bold text-blue-600">診断結果が見つかりませんでした</h2>
+<h2 className="text-2xl font-bold result-title">{result.title}</h2>
+<p className="text-sm text-gray-600">
+  あなたの回答コード：<strong>{answers?.join("") || "不明"}</strong>
+</p>
+
+        
         <p className="text-sm text-gray-600">入力に誤りがあった可能性があります。もう一度お試しください。</p>
         <button
           onClick={onRetry}
@@ -24,6 +29,11 @@ export default function ResultScreen({ result, answers, onRetry }) {
 
       {/* タイトル */}
       <h2 className="text-2xl font-bold result-title">{result.title}</h2>
+
+<p className="text-sm text-gray-600">
+  あなたの回答コード：<strong>{answers?.join("") || "不明"}</strong>
+</p>
+
 
       {/* 説明 */}
       <p className="text-gray-700">{result.description}</p>
