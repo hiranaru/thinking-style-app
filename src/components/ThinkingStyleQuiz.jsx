@@ -102,6 +102,7 @@ export default function ThinkingStyleQuiz() {
     return (
       <ResultScreen
         result={result}
+        answers={answers}  // ここを追加
         onRetry={() => {
           setAnswers([]);
           setPage(-1);
