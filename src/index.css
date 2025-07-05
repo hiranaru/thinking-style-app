@@ -114,3 +114,9 @@ body,
   max-height: 100dvh;
   overflow: auto;
 }
+
+/* 質問文の横幅を固定（PCでは600px、スマホでは自動調整） */
+.question-box {
+  width: 600px;
+  max-width: 90%;
+}
