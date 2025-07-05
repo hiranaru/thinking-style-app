@@ -1,7 +1,7 @@
 // ResultScreen.jsx
 import React from "react";
 
-export default function ResultScreen({ result, onRetry }) {
+export default function ResultScreen({ result, answers, onRetry }) {
   if (result.error) {
     return (
       <div className="max-w-[460px] w-[90%] h-[700px] mx-auto bg-blue-50 rounded-3xl shadow-xl border-4 border-yellow-300 p-6 text-center space-y-6">
