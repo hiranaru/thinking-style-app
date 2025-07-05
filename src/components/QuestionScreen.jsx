@@ -16,9 +16,13 @@ export default function QuestionScreen({ page, questions, onAnswer }) {
           {current.text}
         </p>
 
-        <div className="flex justify-center mb-4">
-          <img src="/Q01.jpg" alt="sun" className="w-24 h-24 object-contain" />
-        </div>
+<div className="flex justify-center mb-4">
+  <img
+    src={`/0${page + 1}.png`}  // ← ページ番号に合わせて01.png～07.pngを表示
+    alt={`Question ${page + 1}`}
+    className="w-24 h-24 object-contain"
+  />
+</div>
 
         <div className="flex flex-col gap-4">
           {Object.entries(current.options).map(([key, label]) => (
