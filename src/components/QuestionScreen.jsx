@@ -12,10 +12,12 @@ export default function QuestionScreen({ page, questions, onAnswer }) {
           察してほしい？言葉にしてほしい？（Q{page + 1}/{questions.length}）
         </h1>
 
-        <p className="text-base md:text-lg font-semibold text-center mb-4">
-          {current.text}
-        </p>
-
+<div className="question-box mx-auto mb-4">
+  <p className="text-base md:text-lg font-semibold text-center">
+    {current.text}
+  </p>
+</div>
+        
 <div className="flex justify-center mb-4">
   <img
     src={`/0${page + 1}.png`}  // ← ページ番号に合わせて01.png～07.pngを表示
