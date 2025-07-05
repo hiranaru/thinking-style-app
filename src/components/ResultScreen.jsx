@@ -11,7 +11,7 @@ export default function ResultScreen({ result, answers, onRetry }) {
 </p>
 
         
-        <p className="text-sm text-gray-600">入力に誤りがあった可能性があります。もう一度お試しください。</p>
+        <p className="text-sm text-gray-600">回答結果を教えてね！</p>
         <button
           onClick={onRetry}
           className="bg-yellow-400 text-white px-6 py-2 rounded-full hover:bg-yellow-500 transition"
