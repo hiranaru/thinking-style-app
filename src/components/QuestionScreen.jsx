@@ -4,6 +4,10 @@ import "../index.css";
 export default function QuestionScreen({ page, questions, onAnswer }) {
   const current = questions[page];
 
+  // 質問ごとに画像を切り替える（01.png ～ 07.png）
+  const imageNumber = String(page + 1).padStart(2, "0");
+  const imagePath = `/${imageNumber}.png`;
+
   return (
     <div className="bg-[#f0f4f8] min-h-screen flex flex-col">
       {/* コンテンツエリア */}
@@ -17,7 +21,7 @@ export default function QuestionScreen({ page, questions, onAnswer }) {
         </p>
 
         <div className="flex justify-center mb-4">
-          <img src="/Q01.jpg" alt="sun" className="w-24 h-24 object-contain" />
+          <img src={imagePath} alt={`Q${page + 1}`} className="w-24 h-24 object-contain" />
         </div>
 
         <div className="flex flex-col gap-4">
