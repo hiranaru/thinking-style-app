@@ -115,8 +115,9 @@ body,
   overflow: auto;
 }
 
-/* 質問文の横幅を固定（PCでは600px、スマホでは自動調整） */
+/* 質問文ボックス：スマホで読みやすく、PCでは中央寄せ */
 .question-box {
-  width: 600px;
-  max-width: 90%;
+  max-width: 600px;
+  width: 100%;
 }
+
