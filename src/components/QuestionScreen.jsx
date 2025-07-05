@@ -12,11 +12,12 @@ export default function QuestionScreen({ page, questions, onAnswer }) {
           察してほしい？言葉にしてほしい？（Q{page + 1}/{questions.length}）
         </h1>
 
-<div className="question-box mx-auto mb-4">
+        <div className="question-box mx-auto mb-4 px-4">
   <p className="text-base md:text-lg font-semibold text-center">
     {current.text}
   </p>
 </div>
+        
         
 <div className="flex justify-center mb-4">
   <img
