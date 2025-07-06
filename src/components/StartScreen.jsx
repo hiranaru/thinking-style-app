@@ -9,6 +9,11 @@ export default function StartScreen({ onStart }) {
         言葉にしてほしい？<br />
         思考スタイル診断！
       </h1>
+            <img
+        src="/logo.png"
+        alt="診断タイトルロゴ"
+        className="w-[80%] max-w-[320px] mb-6"
+      />
 
       {/* キャラクターイラスト */}
       <img
