@@ -4,15 +4,10 @@ export default function StartScreen({ onStart }) {
   return (
     <div className="max-w-[460px] w-[90%] mx-auto my-16 flex flex-col justify-center items-center bg-white rounded-3xl shadow-xl border-4 border-yellow-300 p-6 text-center fade-in space-y-6">
       {/* タイトル（ロゴ風） */}
-      <h1 className="text-3xl font-extrabold text-blue-600 font-logo leading-snug">
-        察してほしい？<br />
-        言葉にしてほしい？<br />
-        思考スタイル診断！
-      </h1>
             <img
         src="/logo.png"
         alt="診断タイトルロゴ"
-        className="w-[80%] max-w-[320px] mb-6"
+        className="w-[80%] max-w-[400px] mb-6"
       />
 
       {/* キャラクターイラスト */}
