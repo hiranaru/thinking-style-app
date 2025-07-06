@@ -10,7 +10,7 @@ export default function StartScreen({ onStart }) {
         思考スタイル診断！
       </h1>
             <img
-        src="public/logo.png"
+        src="/logo.png"
         alt="診断タイトルロゴ"
         className="w-[80%] max-w-[320px] mb-6"
       />
