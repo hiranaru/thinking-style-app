@@ -1,16 +1,13 @@
-// ResultScreen.jsx
 import React from "react";
 
 export default function ResultScreen({ result, answers, onRetry }) {
   if (result.error) {
     return (
       <div className="max-w-[460px] w-[90%] h-[700px] mx-auto bg-blue-50 rounded-3xl shadow-xl border-4 border-yellow-300 p-6 text-center space-y-6">
-<h2 className="text-2xl font-bold result-title">{result.title}</h2>
-<p className="text-sm text-gray-600">
-  あなたの回答コード：<strong>{answers?.join("") || "不明"}</strong>
-</p>
-
-        
+        <h2 className="text-2xl font-bold result-title">{result.title}</h2>
+        <p className="text-sm text-gray-600">
+          あなたの回答コード：<strong>{answers?.join("") || "不明"}</strong>
+        </p>
         <p className="text-sm text-gray-600">回答結果を教えてね！</p>
         <button
           onClick={onRetry}
@@ -30,10 +27,10 @@ export default function ResultScreen({ result, answers, onRetry }) {
       {/* タイトル */}
       <h2 className="text-2xl font-bold result-title">{result.title}</h2>
 
-<p className="text-sm text-gray-600">
-  あなたの回答コード：<strong>{answers?.join("") || "不明"}</strong>
-</p>
-
+      {/* 回答コード */}
+      <p className="text-sm text-gray-600">
+        あなたの回答コード：<strong>{answers?.join("") || "不明"}</strong>
+      </p>
 
       {/* 説明 */}
       <p className="text-gray-700">{result.description}</p>
@@ -48,7 +45,7 @@ export default function ResultScreen({ result, answers, onRetry }) {
         </ul>
       </div>
 
-      {/* 注意点（weaknesses） */}
+      {/* 注意点 */}
       <div>
         <h3 className="font-semibold text-blue-600">⚠ 注意点</h3>
         <ul className="list-disc list-inside text-sm text-gray-800">
@@ -69,14 +66,15 @@ export default function ResultScreen({ result, answers, onRetry }) {
         <h3 className="font-semibold text-blue-600">🔗 相性</h3>
         <p className="text-sm text-gray-800">
           <strong>◎ 相性が良いタイプ：</strong>{result.compatibility?.good}<br />
-          <strong>△ 注意が必要なタイプ：</strong>{result.compatibility?.caution}
+          <strong>△ 注意が必要なタイプ：</strong>{result.compatibility?.bad}
         </p>
       </div>
 
-      {/* 補足コメント */}
+      {/* 補足コメント（meta） */}
       <div>
-        <h3 className="font-semibold text-blue-600">📌 補足</h3>
-        <p className="text-sm text-gray-800">{result.supplementary}</p>
+        <h3 className="font-semibold text-blue-600">🧭 思考の傾向</h3>
+        <p className="text-sm text-gray-800 font-bold">{result.meta?.heading}</p>
+        <p className="text-sm text-gray-800">{result.meta?.summary}</p>
       </div>
 
       {/* やり直しボタン */}
@@ -84,7 +82,7 @@ export default function ResultScreen({ result, answers, onRetry }) {
         onClick={onRetry}
         className="share-button block mx-auto mt-4"
       >
-        最初からやり直す
+        🔄 最初からやり直す
       </button>
     </div>
   );
